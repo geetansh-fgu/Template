@@ -4,30 +4,44 @@ const path = require("path");
 const PORT = 8080;
 app.set('view engine', 'ejs');
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+let tasks = [];
 
-filepath = path.join(__dirname, "/views/index.ejs");
-// app.get("/", (req, res)=>{
-//     let name = "Sam";
-//     let place = "Hyderabad";
-//     res.render(filepath, {name, destination:place});
-// })
-
-function time(){
+function time() {
     const hour = new Date().getHours();
-    if(hour < 12) return "Good Morning";
-    else if(hour < 15) return "Good Afternoon";
-    else if(hour < 15 && hour >= 12) return "Good Afternoon";
-    else if(hour < 20 && hour >= 16) return "Good Evening";
+    if (hour < 12) return "Good Morning";
+    else if (hour < 15) return "Good Afternoon";
+    else if (hour < 20) return "Good Evening";
     else return "Good Night";
 }
-app.get("/welcome", (req, res)=>{
+
+app.post("/add-task", (req, res) => {
+    const newTask = req.body.task;
+    if (newTask) {
+        tasks.push(newTask);
+    }
+    res.redirect("/todo");
+});
+
+app.post("/delete-task/:id", (req, res) => {
+    const taskId = parseInt(req.params.id);
+    if (!isNaN(taskId) && taskId >= 0 && taskId < tasks.length) {
+        tasks.splice(taskId, 1);
+    }
+    res.redirect("/todo");
+});
+
+app.get("/welcome", (req, res) => {
     let name = "John";
     let good = time();
-    // let place = "Hyderabad";
-    res.render(filepath, {name, good});
-})
+    res.render('welcome', { name, good });
+});
 
-app.listen(PORT, (err)=>{
-    if(err) console.log(err);
+app.get("/todo", (req, res) => {
+    res.render('todo', { tasks });
+});
+
+app.listen(PORT, (err) => {
+    if (err) console.log(err);
     else console.log(`Listening to Port ${PORT}`);
-})
+});
