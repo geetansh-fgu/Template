@@ -1,1 +1,1 @@
-Welcome page, Todo List and Product List using EJS
+Welcome page, Todo List, Product List and Profile Page using EJS
