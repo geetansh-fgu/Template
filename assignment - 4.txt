@@ -1,7 +1,6 @@
-assignment - 4
 1. Create and insert :-
  db.students.insertOne({name: "Alex", age: 15, grade: "A"});
-db.students.insertOne({name: "Emily", age: 15, grade: "B"});
+ db.students.insertOne({name: "Emily", age: 15, grade: "B"});
  db.students.insertOne({name: "Soma", age: 19, grade: "C"});
  db.students.insertOne({name: "Tom", age: 21, grade: "C"});
  db.students.insertOne({name: "John", age: 17, grade: "C"});
