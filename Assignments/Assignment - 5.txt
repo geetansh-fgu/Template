@@ -1,4 +1,3 @@
-Assignment - 5
 1. Students with different grades :- 
  db.Students.find({grade:{$ne: "A"}}, {name: 1, grade: 1, _id: 0})
 
