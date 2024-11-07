@@ -1,4 +1,3 @@
-Assignment - 6
 1. Find eligible employees :-
  db.employees.find({$or: [{age: {$gt: 30}}, {experience: {$gt: 5}}]})
 
